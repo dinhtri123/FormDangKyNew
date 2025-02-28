@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body>
+  <main>
+    <div class="swiper banner-slider">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="./images/banner1.png" class="md" alt="">
+          <img src="./images/banner1_sm.png" class="sm" alt="">
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <div class="form-main">
+      <h2>PHIẾU ĐĂNG KÝ HỌC</h2>
+      <div class="container">
+        <form action="">
+          <h3 class="title-section">QUÉT THÔNG TIN GIẤY TỜ XÁC THỰC HỒ SƠ NHẬP HỌC</h3>
+          <div class="form-input form-input-cc" style="grid-template-columns: 1.5fr 1.5fr 3fr">
+            <div class="form-item">
+              <p><strong>Ảnh CMND/CCCD mặt trước</strong><span>(bắt buộc)</span></p>
+              <div class="form-item-preview">
+                <img src="./images/cccd-mt.png" alt="">
+              </div>
+              <div class="form-item-file">
+                <input type="file" name="cccd_mt" id="cccd_mt">
+              </div>
+            </div>
+            <div class="form-item">
+              <p><strong>Ảnh CMND/CCCD mặt sau</strong><span>(bắt buộc)</span></p>
+              <div class="form-item-preview">
+                <img src="./images/cccd-ms.png" alt="">
+              </div>
+              <div class="form-item-file">
+                <input type="file" name="cccd_ms" id="cccd_ms">
+              </div>
+            </div>
+            <div class="form-item">
+              <p><strong>Bản sao công chứng Bằng tốt nghiệp THPT</strong><span>Hoặc giấy chứng nhận tốt nghiệp tạm thời
+                  (không bắt
+                  buộc)</span></p>
+              <div class="form-item-preview">
+                <img src="./images/bang-tot-nghiep-thpt.png" alt="">
+              </div>
+              <div class="form-item-file">
+                <input type="file" name="bangtn" id="bangtn">
+              </div>
+            </div>
+          </div>
+          <h3 class="title-section">Thông tin thí sinh</h3>
+          <div class="form-input" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="form-item">
+              <label for="hoten">
+                Họ và tên
+              </label>
+              <input type="text" name="hoten" id="hoten" placeholder="Họ và tên">
+            </div>
+            <div class="form-item">
+              <label for="ngaysinh">
+                Ngày sinh
+              </label>
+              <input type="date" name="ngaysinh" id="ngaysinh">
+            </div>
+            <div class="form-item">
+              <label for="gioitinh">
+                Giới tính
+              </label>
+              <select name="" id="">
+                <option value="nam" selected>Nam</option>
+                <option value="nu">Nữ</option>
+              </select>
+            </div>
+            <div class="form-item">
+              <label for="dantoc">
+                Dân tộc
+              </label>
+              <input type="text" name="dantoc" id="dantoc" placeholder="Kinh">
+            </div>
+          </div>
+
+          <div class="form-input" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="form-item">
+              <label for="cmnd">
+                Số CCCD/Chứng minh nhân dân
+              </label>
+              <input type="text" name="cmnd" id="cmnd" placeholder="0123456789">
+            </div>
+            <div class="form-item">
+              <label for="ngaycap">
+                Ngày cấp
+              </label>
+              <input type="date" name="ngaycap" id="ngaycap">
+            </div>
+            <div class="form-item">
+              <label for="noicap">
+                Nơi cấp
+              </label>
+              <input type="text" name="noicap" id="noicap" placeholder="Hà Nội, Hồ Chí Minh,...">
+            </div>
+          </div>
+          <h4>Hộ khẩu thường trú (Ghi đầy đủ, chính xác như trong sổ hộ khẩu)</h4>
+          <div class="form-input" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="form-item">
+              <select class="province-select" id="" data-select="1">
+                <option value="" selected>Chọn tỉnh/thành phố</option>
+              </select>
+            </div>
+            <div class="form-item">
+              <select class="district-select" id="" data-select="1">
+                <option value="" selected>Quận/Huyện</option>
+              </select>
+            </div>
+            <div class="form-item">
+              <select class="ward-select" id="" data-select="1">
+                <option value="" selected>Xã/Phường/Thị Trấn</option>
+              </select>
+            </div>
+            <div class="form-item">
+              <input type="text" name="sonha" id="sonha" placeholder="Số nhà, đường, ngõ, xóm">
+            </div>
+          </div>
+          <div class="form-input" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="form-item">
+              <label for="sdt">
+                Số điện thoại của thí sinh
+              </label>
+              <input type="text" name="sdt" id="sdt" placeholder="0987654321">
+            </div>
+            <div class="form-item">
+              <label for="email">
+                Email của thí sinh
+              </label>
+              <input type="email" name="email" id="email" placeholder="example@gmail.com">
+            </div>
+            <div class="form-item">
+              <label for="phuhuynh">
+                Phụ huynh/người bảo trợ
+              </label>
+              <input type="text" name="phuhuynh" id="phuhuynh" placeholder="Họ và tên">
+            </div>
+            <div class="form-item">
+              <label for="sdtphuhuynh">
+                Số điện thoại phụ huynh/người bảo trợ
+              </label>
+              <input type="text" name="sdtphuhuynh" id="sdtphuhuynh" placeholder="0987654321">
+            </div>
+          </div>
+          <h3 class="title-section">Thông tin đăng ký trường cao đẳng FPT POLYTECHNIC</h3>
+          <div class="form-input" style="grid-template-columns: repeat(2, 1fr)">
+            <div class="form-item">
+              <label for="coso">
+                Cơ sở nhập học
+              </label>
+              <select name="" id="">
+                <option value="hanoi" selected>Hà Nội</option>
+              </select>
+            </div>
+            <div class="form-item"></div>
+          </div>
+          <div class="form-input" style="grid-template-columns: repeat(2, 1fr)">
+            <div class="form-item option_columns">
+              <label for="nguyenvong">
+                Nguyện vọng thứ nhất
+              </label>
+              <select name="" id="sector-select">
+                <option value="" selected>Ngành</option>
+              </select>
+              <select name="" id="major-select">
+                <option value="" selected>Chuyên ngành</option>
+              </select>
+            </div>
+            <div class="form-item option_columns">
+              <label for="nguyenvong">
+                Nguyện vọng thứ hai
+              </label>
+              <select name="" id="sector-select">
+                <option value="" selected>Ngành</option>
+              </select>
+              <select name="" id="major-select">
+                <option value="" selected>Chuyên ngành</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-input" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="form-item">
+              <label for="namtotnghiep">
+                Năm tốt nghiệp THPT hoặc tương đương
+              </label>
+              <select name="" id="">
+                <option value="2024" selected>2024</option>
+              </select>
+            </div>
+            <div class="form-item">
+              <label for="truongtotnghiep">
+                Trường tốt nghiệp THPT hoặc tương đương
+              </label>
+              <input type="text" name="truongtotnghiep" id="truongtotnghiep" placeholder="Trường">
+            </div>
+          </div>
+          <h4>Nơi tốt nghiệp</h4>
+          <div class="form-input" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="form-item">
+              <select class="province-select" id="" data-select="2">
+                <option value="" selected>Chọn tỉnh/thành phố</option>
+              </select>
+            </div>
+            <div class="form-item">
+              <select class="district-select" id="" data-select="2">
+                <option value="" selected>Quận/Huyện</option>
+              </select>
+            </div>
+            <div class="form-item">
+              <select class="ward-select" id="" data-select="2">
+                <option value="" selected>Xã/Phường/Thị Trấn</option>
+              </select>
+            </div>
+          </div>
+          <h3 class="title-section">Thông tin gửi giấy báo kết quả (Xét tuyển/trúng tuyển)</h3>
+          <div class="form-input" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="form-item form-radio">
+              <label for="">
+                Nguời nhận
+              </label>
+              <div class="form-radio-item">
+                <label for="thisinh">
+                  <input type="radio" name="nguoinhan" id="thisinh">
+                  Thí sinh
+                </label>
+                <label for="phuhuynhnhan">
+                  <input type="radio" name="nguoinhan" id="phuhuynhnhan">
+                  Phụ huynh/người bảo trợ
+                </label>
+              </div>
+            </div>
+            <div class="form-item form-radio">
+              <label for="">
+                Địa chỉ nhận
+              </label>
+              <div class="form-radio-item">
+                <label for="hktt">
+                  <input type="radio" name="diachinhan" id="hktt">
+                  Địa chỉ hộ khẩu thường trú
+                </label>
+                <label for="diachikhac">
+                  <input type="radio" name="diachinhan" id="diachikhac">
+                  Địa chỉ khác
+                  <input type="text" name="textdiachikhac" id="textdiachikhac" class="input_text_line">
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="text_camket">
+            <label for="camket">
+              <input type="checkbox" name="camket" id="camket">
+              Tôi xin cam đoan những lời khai của tôi trên phiếu đăng ký này là đúng sự thật. Nếu sai tôi hoàn toàn chịu
+              trách nhiệm và bị xử lý theo các quy định của Nhà trường. Tôi đã đọc kỹ và xin cam kết tuân thủ Quy định
+              tài chính của nhà trường
+            </label>
+          </div>
+          <button type="submit">Gửi hồ sơ đăng ký</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".banner-slider", {
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+    });
+  </script>
+  <script src="./index.js"></script>
+</body>
+
+</html>
