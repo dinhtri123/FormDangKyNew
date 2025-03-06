@@ -65,34 +65,87 @@ fetch("./dvhcvn.json")
     populateSelects(data);
   })
   .catch((error) => console.error("Error loading JSON:", error));
-fetch("./chuyenganh.json")
-  .then((response) => response.json())
-  .then((json) => {
-    const sectorSelect = document.querySelector("#sector-select");
-    const majorSelect = document.querySelector("#major-select");
 
-    // Populate sector dropdown
-    json.fields.forEach((field) => {
-      const option = document.createElement("option");
-      option.value = field.sector;
-      option.textContent = field.sector;
-      sectorSelect.appendChild(option);
-    });
+let data = {};
 
-    sectorSelect.addEventListener("change", function () {
-      majorSelect.innerHTML = '<option value="">Chuyên ngành</option>';
-      const selectedSector = this.value;
-      const selectedField = json.fields.find(
-        (field) => field.sector === selectedSector
-      );
-      if (selectedField) {
-        selectedField.majors.forEach((major) => {
-          const option = document.createElement("option");
-          option.value = major;
-          option.textContent = major;
-          majorSelect.appendChild(option);
-        });
-      }
-    });
-  })
-  .catch((error) => console.error("Error loading JSON:", error));
+const cosoSelect = document.getElementById("coso-select");
+const sector1Select = document.getElementById("sector1-select");
+const major1Select = document.getElementById("major1-select");
+const sector2Select = document.getElementById("sector2-select");
+const major2Select = document.getElementById("major2-select");
+
+async function loadData() {
+  try {
+    const response = await fetch("./ds-chuyen-nganh.json");
+    data = await response.json();
+    updateCosoOptions();
+  } catch (error) {
+    console.error("Lỗi tải dữ liệu:", error);
+  }
+}
+
+function updateCosoOptions() {
+  const cosoList = data.danhsachcoso.map((c) => c.coso);
+  updateSelectOptions(cosoSelect, cosoList, "Chọn cơ sở");
+
+  cosoSelect.addEventListener("change", updateSectorOptions);
+  updateSectorOptions();
+}
+
+function updateSectorOptions() {
+  const selectedCoso = cosoSelect.value;
+  if (!selectedCoso) {
+    updateSelectOptions(sector1Select, [], "Chọn ngành");
+    updateSelectOptions(sector2Select, [], "Chọn ngành");
+    updateSelectOptions(major1Select, [], "Chọn chuyên ngành");
+    updateSelectOptions(major2Select, [], "Chọn chuyên ngành");
+    return;
+  }
+  const cosoData = data.danhsachcoso.find((c) => c.coso === selectedCoso);
+
+  if (!cosoData) return;
+
+  const sectors = [...new Set(cosoData.chuyennganhhep.map((c) => c.level1))];
+
+  updateSelectOptions(sector1Select, sectors, "Chọn ngành");
+  updateSelectOptions(sector2Select, sectors, "Chọn ngành");
+
+  updateSelectOptions(major1Select, [], "Chọn chuyên ngành");
+  updateSelectOptions(major2Select, [], "Chọn chuyên ngành");
+
+  sector1Select.addEventListener("change", () =>
+    updateMajorOptions(sector1Select, major1Select)
+  );
+  sector2Select.addEventListener("change", () =>
+    updateMajorOptions(sector2Select, major2Select)
+  );
+}
+
+function updateMajorOptions(sectorSelect, majorSelect) {
+  const selectedCoso = cosoSelect.value;
+  const selectedSector = sectorSelect.value;
+  const cosoData = data.danhsachcoso.find((c) => c.coso === selectedCoso);
+
+  if (!selectedSector) {
+    updateSelectOptions(majorSelect, [], "Chọn chuyên ngành");
+    return;
+  }
+
+  const majors = cosoData.chuyennganhhep
+    .filter((c) => c.level1 === selectedSector)
+    .map((c) => c.name);
+
+  updateSelectOptions(majorSelect, majors, "Chọn chuyên ngành");
+}
+
+function updateSelectOptions(selectElement, options, defaultText) {
+  selectElement.innerHTML = `<option value="">${defaultText}</option>`;
+  options.forEach((option) => {
+    const newOption = document.createElement("option");
+    newOption.value = option;
+    newOption.textContent = option;
+    selectElement.appendChild(newOption);
+  });
+}
+
+loadData();
