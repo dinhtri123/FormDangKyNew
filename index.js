@@ -94,30 +94,31 @@ function updateCosoOptions() {
 
 function updateSectorOptions() {
   const selectedCoso = cosoSelect.value;
+
   if (!selectedCoso) {
-    updateSelectOptions(sector1Select, [], "Chọn ngành");
-    updateSelectOptions(sector2Select, [], "Chọn ngành");
     updateSelectOptions(major1Select, [], "Chọn chuyên ngành");
     updateSelectOptions(major2Select, [], "Chọn chuyên ngành");
+    updateSelectOptions(sector1Select, [], "Ngành");
+    updateSelectOptions(sector2Select, [], "Ngành");
     return;
   }
-  const cosoData = data.danhsachcoso.find((c) => c.coso === selectedCoso);
 
+  const cosoData = data.danhsachcoso.find((c) => c.coso === selectedCoso);
   if (!cosoData) return;
 
-  const sectors = [...new Set(cosoData.chuyennganhhep.map((c) => c.level1))];
+  const majors = cosoData.chuyennganhhep.map((c) => c.name);
 
-  updateSelectOptions(sector1Select, sectors, "Chọn ngành");
-  updateSelectOptions(sector2Select, sectors, "Chọn ngành");
+  updateSelectOptions(major1Select, majors, "Chọn chuyên ngành");
+  updateSelectOptions(major2Select, majors, "Chọn chuyên ngành");
 
-  updateSelectOptions(major1Select, [], "Chọn chuyên ngành");
-  updateSelectOptions(major2Select, [], "Chọn chuyên ngành");
+  updateSelectOptions(sector1Select, [], "Ngành");
+  updateSelectOptions(sector2Select, [], "Ngành");
 
-  sector1Select.addEventListener("change", () =>
-    updateMajorOptions(sector1Select, major1Select)
+  major1Select.addEventListener("change", () =>
+    autoSelectSector(major1Select, sector1Select)
   );
-  sector2Select.addEventListener("change", () =>
-    updateMajorOptions(sector2Select, major2Select)
+  major2Select.addEventListener("change", () =>
+    autoSelectSector(major2Select, sector2Select)
   );
 }
 
@@ -146,6 +147,19 @@ function updateSelectOptions(selectElement, options, defaultText) {
     newOption.textContent = option;
     selectElement.appendChild(newOption);
   });
+}
+function autoSelectSector(majorSelect, sectorSelect) {
+  const selectedCoso = cosoSelect.value;
+  const selectedMajor = majorSelect.value;
+  const cosoData = data.danhsachcoso.find((c) => c.coso === selectedCoso);
+
+  if (!cosoData) return;
+
+  const found = cosoData.chuyennganhhep.find((c) => c.name === selectedMajor);
+
+  if (found) {
+    sectorSelect.innerHTML = `<option value="${found.level1}">${found.level1}</option>`;
+  }
 }
 
 loadData();
